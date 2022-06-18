@@ -1,0 +1,143 @@
+<%- include('../partials/header')-%>
+  <%- include('../partials/navbar')-%>
+
+
+    <div class="d-flex  justify-content-center  align-items-center">
+
+      <section class="h-100 h-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+              <div class="card rounded-3">
+                <img src="/img/product.png" class="w-80"
+                  style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+                <div class="card-body p-4 p-md-5">
+                  <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Editar Produto</h3>
+
+
+                  <form class="px-md-2" method="post" onsubmit="confirmarDelecao(event,this)"
+                    action="/product/edit/<%= product.id%>">
+
+                    <label for="inputName" class="form-label">
+                      Nome
+                    </label>
+                    <div class="input-group mb-2">
+                      <input type="text" id="inputName"  data-js="name"  name="name" value="<%= product.name %>" class="form-control" />
+                    </div>
+                    <% if (nameError) { %>
+                      <span class="spanError ">
+                        <%= nameError%>
+                      </span>
+                      <% } %>
+                        <div class="row">
+                          <div class="col-md-10 mb-2">
+                            <label for="InputCategory" class="form-label">
+                              Categoria
+                            </label>
+                            <select id="InputCategory" name="category" class="form-select">
+                              <option>Selecione</option>
+
+                              <% categoryData.map(category=>{%>
+                               
+                                <% if(product.category == category.id ){%>
+                                  <option value="<%= category.id %>" selected>
+                                    <%= category.name %>
+                                  </option>
+
+                                  <% }else{%>
+                                    <option value="<%=category.id%>">
+                                      <%= category.name %>
+                                    </option>
+
+                                    <% }%>
+                                      <% }) %>
+                            </select>
+                          </div>
+                          <% if (categoryError) { %>
+                            <span class="spanError ">
+                              <%= categoryError%>
+                            </span>
+                            <% } %>
+
+
+                              <div class="col-md-10 my-2">
+                                <label for="inputProvider" class="form-label">
+                                  Fornecedor
+                                </label>
+                                <select id="inputProvider" name="provider" class="form-select">
+                                  <option>Selecione</option>
+
+                                  <% providerData.map(provider=>{%>
+                                 
+                                    <% if(product.provider == provider.id ){%>
+                                      <option value="<%= provider.id %>" selected>
+                                        <%= provider.name %>
+                                      </option>
+    
+                                      <% }else{%>
+                                        <option value="<%=provider.id%>">
+                                          <%= provider.name %>
+                                        </option>
+    
+                                        <% }%>
+                                          <% }) %>
+                                </select>
+
+                                </select>
+                              </div>
+
+                              <% if (providerError) { %>
+                                <span class="spanError">
+                                  <%= providerError %>
+                                </span>
+                                <% } %>
+
+
+
+                                  <label for="inputValue" class="form-label">
+                                    Valor
+                                  </label>
+                                  <div class="input-group mb-2">
+                                    <input type="text" id="inputValue" data-js="money" name="value" value="<%= product.value %>"
+                                      class="form-control" aria-label="Amount (to the nearest dollar)">
+                                  </div>
+
+                                  <% if (valueError) { %>
+                                    <span class="spanError">
+                                      <%= valueError%>
+                                    </span>
+                                    <% } %>
+
+                                      <label for="inputTheAmount" class="form-label">
+                                        Quantidade
+                                      </label>
+                                      <div class="input-group mb-3">
+                                        <input type="text" data-js="int" id="inputTheAmount" name="theAmount"
+                                          value="<%= product.theAmount %>" class="form-control"
+                                          aria-label="Amount (to the nearest dollar)">
+                                      </div>
+
+
+                                      <% if (theAmountError ) { %>
+                                        <span class="spanError">
+                                          <%= theAmountError%>
+                                        </span>
+                                        <% } %>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <a class="btn btn-danger mt-2 btn-lg mb-1"  href="/products" role="button">Cancelar</a>
+                          <button class="btn btn-success mt-2 btn-lg mb-1">Cadastrar</button>
+                        </div>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <%- include('../partials/footer')-%>
+
+      <script src="/js/mainjs/product.js"></script>

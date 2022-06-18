@@ -1,0 +1,60 @@
+<%- include('../partials/header')-%>
+    <%- include('../partials/navbar')-%>
+
+
+        <div class="d-flex  justify-content-center  flex-column  align-items-center">
+
+            <div class="card w-50 my-5" style="width: 20rem; ">
+                <img src="/img/product.png" class="card-img-top" class="img-fluid " />
+
+                <div class="card-body w-100">
+                    <form class="px-md-2" method="post" action="/category/edit/<%= category.id %>"
+                        onsubmit="validation(event,this)">
+        
+                        <div class="d-grid gap-2">
+                            <h3 class="text-center my-2">Editar Categoria
+        
+                            </h3>
+                            <label for="inputName" class="form-label">
+                                Nome
+                            </label>
+                            <div class="input-group mb-2 ">
+                                <input type="text" id="inputName" name="name" value="<%= category.name %>"
+                                    class="form-control" />
+                            </div>
+                            <span id="errorName" class="spanError hide ">
+                                O Nome é obrigatório
+                            </span>
+        
+        
+                            <% if (nameError) { %>
+        
+        
+                                <span class="spanError ">
+                                    <%= nameError%>
+                                </span>
+                                <% } %>
+        
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a class="btn btn-danger mt-2 btn-lg mb-1"  href="/categories" role="button">Cancelar</a>
+                                    <button class="btn btn-success mt-2 btn-lg mb-1">Cadastrar</button>
+                                  </div>
+        
+                        </div>
+        
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+        <%- include('../partials/footer')-%>
+
+            <script src="/js/mainjs/category.js"></script>
+
+
+
+         

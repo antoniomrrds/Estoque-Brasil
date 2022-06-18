@@ -1,0 +1,93 @@
+<%- include('../partials/header')-%>
+    <%- include('../partials/navbar')-%>
+
+
+        <div class="d-flex  justify-content-center  flex-column  align-items-center">
+            
+            <div class="card w-50 my-5" style="width: 20rem; ">
+                <img src="/img/product.png" class="card-img-top" class="img-fluid " />
+
+                <div class="card-body w-100">
+                    <form class="px-md-2" method="post" action="/provider" onsubmit="validation(event,this)">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Cadastro de Fornecedor</h3>
+                        <div class="d-grid gap-2">
+
+                            <label for="inputName" class="form-label">
+                                Nome
+                            </label>
+                            <div class="input-group mb-2 ">
+                                <input type="text" id="inputName" name="name" value="<%= name %>"
+                                    class="form-control" />
+                            </div>
+                            <span id="errorName" class="spanError hide ">
+                                O Nome é obrigatório
+                            </span>
+                            <% if (nameError) { %>
+                                <span class="spanError ">
+                                    <%= nameError%>
+                                </span>
+                                <% } %>
+                                    <div>
+                                        <label for="InputState" class="form-label mb-2">
+                                            Estado
+                                        </label>
+                                        <select id="InputState" name="state" class="form-select">
+                                            <option selected>Selecione</option>
+                                            <option selected>Estado</option>
+                                            <option value="AC">Acre</option>
+                                            <option value="AL">Alagoas</option>
+                                            <option value="AP">Amapá</option>
+                                            <option value="AM">Amazonas</option>
+                                            <option value="BA">Bahia</option>
+                                            <option value="CE">Ceará</option>
+                                            <option value="DF">Distrito Federal</option>
+                                            <option value="ES">Espírito Santo</option>
+                                            <option value="GO">Goiás</option>
+                                            <option value="MA">Maranhão</option>
+                                            <option value="MT">Mato Grosso</option>
+                                            <option value="MS">Mato Grosso do Sul</option>
+                                            <option value="MG">Minas Gerais</option>
+                                            <option value="PA">Pará</option>
+                                            <option value="PB">Paraíba</option>
+                                            <option value="PR">Paraná</option>
+                                            <option value="PE">Pernambuco</option>
+                                            <option value="PI">Piauí</option>
+                                            <option value="RJ">Rio de Janeiro</option>
+                                            <option value="RN">Rio Grande do Norte</option>
+                                            <option value="RS">Rio Grande do Sul</option>
+                                            <option value="RO">Rondônia</option>
+                                            <option value="RR">Roraima</option>
+                                            <option value="SC">Santa Catarina</option>
+                                            <option value="SP">São Paulo</option>
+                                            <option value="SE">Sergipe</option>
+                                            <option value="TO">Tocantins</option>
+                                        </select>
+                                     
+                                    </div>
+                                    <span id="errorState" class="spanError hide mt-2">
+                                        O Estado é obrigatório
+                                    </span>
+                                    <% if (stateError) { %>
+                                        <span class="spanError mt-2 hide ">
+                                            <%= stateError%>
+                                        </span>
+                                        <% } %>
+
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <a class="btn btn-danger mt-2 btn-lg mb-1"  href="/providers" role="button">Cancelar</a>
+                                            <button class="btn btn-success mt-2 btn-lg mb-1">Cadastrar</button>
+                                          </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+        <%- include('../partials/footer')-%>
+
+            <script src="/js/mainjs/provider.js"></script>

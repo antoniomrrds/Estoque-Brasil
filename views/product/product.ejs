@@ -1,0 +1,115 @@
+<%- include('../partials/header')-%>
+  <%- include('../partials/navbar')-%>
+    <div class="d-flex  justify-content-center  align-items-center my-5">
+      <div class="card w-auto">
+        <h5 class="card-header   bg-info text-white fs-3">Lista de Produtos </h5>
+        <div class="card-body mb-5 ">
+          <div class="d-flex  justify-content-center  align-items-center">
+            <div class="tab-content w-auto my-2" id="ex-with-icons-content">
+              <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel"
+                aria-labelledby="ex-with-icons-tab-1">
+                <table class="table align-middle mb-0 bg-white">
+                  <thead class="bg-light">
+                    <tr class="text-bolder-product">
+                      <th>N°</th>
+                      <th>Nome</th>
+                      <th>Fornecedor</th>
+                      <th>Categoria</th>
+                      <th>Valor</th>
+                      <th>Quantidade</th>
+                      <th class="text-center">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody class=" table-text">
+                  
+                    <% if(product !=0){ %>
+                      <% product.map((product,index)=>{%>
+
+                        <tr>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div >
+                                <p class="fw-bold mb-1 ">
+                                  <%= index+1%>
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+
+                          <td>
+                                <p class="fw-bold   text-center ">
+                                  <%= product.name%>
+                                </p>
+                            
+                            </div>
+                          </td>
+                          <td>
+                            <%provider.map(provider=>{%>
+                              <%if(provider.id==product.provider ){%>
+                                <p class="fw-normal ms-1 mb-1 text-center fw-bold">
+                                  <%= provider.name %>
+                                </p>
+                                <% } %>
+                                  <% }) %>
+
+                          </td>
+                          <td>
+                            <%category.map(category=>{%>
+                              <%if(category.id==product.category ){%>
+                                <p class="fw-normal text-center mb-1 fw-bold">
+                                  <%=  category.name %>
+                                </p>
+                                <% } %>
+                                  <% }) %>
+                          </td>
+
+                          <td>
+                            <p class="fw-normal mb-1 text-center fw-bold">
+                              <% 
+                              let formatter = new Intl.NumberFormat([], {
+                                style: 'currency',
+                                currency: 'BRL'
+                              })
+                              %>
+                             <%= formatter.format(product.value)%>
+                            </p>
+                          </td>
+                          <td>
+                            <p class="fw-normal mb-1 fw-bold text-center">
+                              <%= product.theAmount %>
+                            </p>
+                          </td>
+                          <div class="d-flex flex-wrap">
+
+                          </div>
+
+                          <td>
+                            <form action="/product/delete" method="post" class="d-flex justify-content-center  d-inline"
+                              onsubmit="confirmarDelecao(event,this)">
+                              <input type="hidden" name="id" value="<%= product.id %>">
+
+                              <a href="/product/<%= product.id %>" class="btn btn-warning ms-2"> <i
+                                  class="fas fa-edit"></i></a>
+
+                              <button class="btn btn-danger ms-3" style="background:red"> <i
+                                  class="fas fa-trash-alt"></i></i></button>
+                            </form>
+                          </td>
+                        </tr>
+                        <% }); %>
+                          <% }%>
+                  </tbody>
+                </table>
+                <% if (product==0 ) { %>
+                  <tr>
+                    <span class="spanError  d-flex  justify-content-center my-5">
+                      <%= err %>
+                    </span>
+                  <tr>
+                    <% }%>
+              </div>
+            </div>
+          </div>
+          <%- include('../partials/footer')-%>
+
+ 

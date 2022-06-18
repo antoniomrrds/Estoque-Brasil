@@ -1,0 +1,86 @@
+ <%- include('../partials/header')-%>
+  <%- include('../partials/navbar')-%>
+  <div class="d-flex  justify-content-center  align-items-center my-5">
+      
+      <div class="card w-auto ">
+       
+        <h5 class="card-header bg-secondary  bg-gradient text-white  fs-3">Lista de Fornecedores </h5>
+        <div class="card-body mb-3">
+          <div class="d-flex  justify-content-center  align-items-center">
+            <div class="tab-content my-2 w-auto" id="ex-with-icons-content">
+              <div class="tab-pane   fade show active" id="ex-with-icons-tabs-1" role="tabpanel"
+                aria-labelledby="ex-with-icons-tab-1">
+                <table class="table align-middle bg-white ">
+                  <thead >
+                    <tr class="text-bolder-provider">
+                      <th>N°</th>
+                      <th>Fornecedor</th>
+                      <th>Estado</th>
+                      <th class="text-center">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <% if(providers != 0){ %>
+
+                      <% providers.map((providers,index)=>{%>
+                        <tr class="table-text">
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div >
+                                <p class="fw-bold mb-1 ">
+                                  <%= index+1%>
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                <p class="fw-bold mb-1">
+                                  <%= providers.name%>
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="d-flex align-items-center">
+                              <div class="ms-3">
+                                <p class="fw-bold mb-1">
+                                  <%= providers.state%>
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <form action="/provider/delete" method="post" on class="d-flex justify-content-center me-2 d-inline">
+                              <input type="hidden" name="id" value="<%= providers.id %>">
+
+                              <a href="/provider/<%= providers.id %>" class="btn btn-warning ms-2"> <i
+                                  class="fas fa-edit"></i></a>
+
+                              <button class="btn btn-danger ms-3" style="background:red"> <i
+                                  class="fas fa-trash-alt"></i></i></button>
+                            </form>
+                          </td>
+                        </tr>
+                        <% }); %>
+                          <% }%>
+                  </tbody>
+                </table>
+
+
+
+
+                <% if (providers ==0 ) { %>
+                  <span class="spanError  d-flex  justify-content-center my-5">
+                    <%= err %>
+                  </span>
+
+
+                  <% }%>
+              </div>
+            </div>
+            </div>
+          
+          <%- include('../partials/footer')-%>
+     

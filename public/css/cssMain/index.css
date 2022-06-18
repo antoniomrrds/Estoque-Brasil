@@ -1,0 +1,55 @@
+:root{
+    --text-color:#eaeaee;
+    --text-color-secondary:#39C0D3;
+}
+
+.nav-text{
+    color:var(--text-color);
+    text-decoration: none;
+}
+:hover.nav-text{
+    color:var(--text-color-secondary);
+    text-decoration: none;
+}
+
+.nav-text:active  ,.nav-text:visited ,.nav-text:link {
+    text-decoration: none;
+  }
+
+  @media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+.spanError{
+    color: red;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.hide{
+display: none !important;
+}
+.table-text{
+    font-size: 1.2rem;
+}
+
+
+.text-bolder-product{
+    font-weight: bolder !important;
+    font-size: 1.5rem;
+    color:#008891
+
+}
+
+.text-bolder-category{
+    font-weight: bolder !important;
+    font-size: 1.5rem;
+    color:blue;
+
+}
+.text-bolder-provider{
+    font-weight: bolder !important;
+    font-size: 1.5rem;
+    color:blueviolet;
+
+}

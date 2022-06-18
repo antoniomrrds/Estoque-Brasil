@@ -1,0 +1,174 @@
+<%- include('../partials/header')-%>
+  <%- include('../partials/navbar')-%>
+
+
+    <div class="d-flex  justify-content-center  align-items-center">
+
+      <% if (providerData.length==0 || categoryData.length==0) { %>
+        <div class="d-flex my-5 justify-content-center  align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </symbol>
+          </svg>
+          <div class="alert alert-danger d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+              <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <div>
+              <% if (providerData.length==0 && categoryData.length==0) { %>
+                Cadastre Fornecedores e Categorias
+                <% }else{ %>
+                  <% if (providerData.length==0) { %>
+                    Cadastre Fornecedores
+                    <% }else{ %>
+                      Cadastre Categorias
+                      <% }%>
+                        <% }%>
+            </div>
+          </div>
+        </div>
+        <% }else{ %>
+
+          <section class="h-100 h-custom">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-8 col-xl-6">
+                  <div class="card rounded-3">
+                    <img src="img/product.png" class="w-80"
+                      style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+                    <div class="card-body p-4 p-md-5">
+                      <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Cadastrar Produto</h3>
+
+                      <form class="px-md-2" method="post" action="/product" onsubmit="validation(event,this)">
+
+
+                        <label for="inputName" class="form-label">
+                          Nome
+                        </label>
+                        <div class="input-group mb-2">
+                          <input type="text" id="inputName" data-js="name" name="name" value="<%= name %>" class="form-control" />
+                        </div>
+                        <span id="errorName" class="spanError hide ">
+                          O Nome é obrigatório
+                        </span>
+
+                        <% if (nameError) { %>
+                          <span class="spanError ">
+                            <%= nameError%>
+                          </span>
+                          <% } %>
+
+
+
+                            <div class="row">
+                              <div class="col-md-10">
+                                <label for="InputCategory" class="form-label">
+                                  Categoria
+                                </label>
+                                <select id="InputCategory" name="category" value="<%=  category%>" class="form-select">
+
+                                  <option selected>Selecione</option>
+                                  <% categoryData.map(category=>{%>
+                                    <option value="<%= category.id %>"> <%= category.name %></option>
+                                  <% }) %>
+                                </select>
+                              </div>
+
+                              <span id="errorCategory" class="spanError hide mt-2">
+                                A Categoria é obrigatória !!!
+                              </span>
+                              <% if (categoryError) { %>
+                                <span class="spanError ">
+                                  <%= categoryError%>
+                                </span>
+                                <% } %>
+
+
+                                  <div class="col-md-10 my-2">
+                                    <label for="inputProvider" class="form-label">
+                                      Fornecedor
+                                    </label>
+                                    <select id="inputProvider" name="provider" class="form-select">
+                                      <option selected>Selecione</option>
+                                      <% providerData.map(provider=>{%>
+                                      <option value="<%=  provider.id %>"> <%= provider.name %></option>
+                                    <% }) %>
+                                    </select>
+                                  </div>
+
+
+                                  <span id="errorProvider" class="spanError hide mt-2">
+                                    O Fornecedor é obrigatório !!!
+                                  </span>
+                              
+                                  <% if (providerError) { %>
+                                    <span class="spanError">
+                                      <%= providerError %>
+                                    </span>
+                                    <% } %>
+    
+
+                                  <label for="inputValue" class="form-label">
+                                    Valor
+                                  </label>
+                                  <div class="input-group mb-3">
+                                    <input type="text" id="inputValue" data-js="money" name="value" value="<%= value %>"
+                                      class="form-control" aria-label="Amount (to the nearest dollar)">
+                                  </div>
+
+                                  <span id="errorValue" class="spanError hide mt-2">
+                                    O Valor é obrigatório !!!
+                                  </span>
+
+                                  <% if (valueError) { %>
+                                    <span class="spanError">
+                                      <%= valueError%>
+                                    </span>
+                                    <% } %>
+
+                                      <label for="inputTheAmount" class="form-label">
+                                        Quantidade
+                                      </label>
+                                      <div class="input-group mb-3">
+                                        <input type="text" id="inputTheAmount" data-js="int" value="<%= theAmount %>" name="theAmount"
+                                          class="form-control" aria-label="Amount (to the nearest dollar)">
+                                      </div>
+                                      <span id="errorTheAmount" class="spanError hide mt-2">
+                                        O Quantidade é obrigatória !!!
+                                      </span>
+
+                                      <% if (theAmountError ) { %>
+                                        <span class="spanError">
+                                          <%= theAmountError%>
+                                        </span>
+                                        <% } %>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                              <a class="btn btn-danger mt-2 btn-lg mb-1"  href="/products" role="button">Cancelar</a>
+                              <button class="btn btn-success mt-2 btn-lg mb-1">Cadastrar</button>
+                            </div>
+                    </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <% }%>
+    </div>
+
+
+
+
+    <%- include('../partials/footer')-%>
+      <script src="/js/mainjs/product.js"></script>
